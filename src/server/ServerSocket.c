@@ -1,25 +1,26 @@
 #include "../../inc/serverSocket.h"
 //sockfd
-int createServerSocket(struct sockaddr_un *servaddr){
+int createServerSocket(struct sockaddr_un **servaddr){
 	int sockfd = -1;
 	int ret = -1;
-	servaddr = (struct sockaddr_un *)malloc(sizeof(struct sockaddr_un));
+	struct sockaddr_un *pservaddr = *servaddr;
+	*servaddr = (struct sockaddr_un *)malloc(sizeof(struct sockaddr_un));
 	
 
 	sockfd = socket(AF_UNIX,SOCK_STREAM,0);
 
 	bzero(servaddr,sizeof(*servaddr));
-	servaddr->sun_family = AF_UNIX;
-	strcpy(servaddr->sun_path,"/tmp/myxyz");   ////gao2022-0511-21
+	pservaddr->sun_family = AF_UNIX;
+	strcpy(pservaddr->sun_path,"/tmp/myxyz");   ////gao2022-0511-21
 
-	ret = bind(sockfd,(struct sockaddr *)servaddr,sizeof(*servaddr));
+	ret = bind(sockfd,(struct sockaddr *)pservaddr,sizeof(*pservaddr));
 	ret += listen(sockfd,6);
 	if(ret < 0)
 	{
 		close(sockfd);
 		sockfd = -1;
-		free(servaddr);
-		servaddr = NULL;
+		free(pservaddr);
+		pservaddr = NULL;
 		perror("bind or listen failed:");
 		return 1;
 	}

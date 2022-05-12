@@ -1,26 +1,25 @@
 #include "../../inc/serverSocket.h"
 //sockfd
-int createServerSocket(struct sockaddr_un **servaddr){
+int createServerSocket(struct sockaddr_in **ppservaddr){
 	int sockfd = -1;
 	int ret = -1;
-	struct sockaddr_un *pservaddr = *servaddr;
-	*servaddr = (struct sockaddr_un *)malloc(sizeof(struct sockaddr_un));
+	*ppservaddr = (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
 	
+	sockfd = socket(AF_INET,SOCK_STREAM,0);
 
-	sockfd = socket(AF_UNIX,SOCK_STREAM,0);
+	bzero(*ppservaddr,sizeof(**ppservaddr));
+	(*ppservaddr)->sin_family = AF_INET;
+	(*ppservaddr)->sin_port = htons(3456);
+	inet_aton("127.0.0.1",&(*ppservaddr)->sin_addr);
 
-	bzero(servaddr,sizeof(*servaddr));
-	pservaddr->sun_family = AF_UNIX;
-	strcpy(pservaddr->sun_path,"/tmp/myxyz");   ////gao2022-0511-21
-
-	ret = bind(sockfd,(struct sockaddr *)pservaddr,sizeof(*pservaddr));
+	ret = bind(sockfd,(struct sockaddr *)(*ppservaddr),sizeof(**ppservaddr));
 	ret += listen(sockfd,6);
 	if(ret < 0)
 	{
 		close(sockfd);
 		sockfd = -1;
-		free(pservaddr);
-		pservaddr = NULL;
+		free(*ppservaddr);
+		*ppservaddr = NULL;
 		perror("bind or listen failed:");
 		return 1;
 	}
@@ -28,7 +27,7 @@ int createServerSocket(struct sockaddr_un **servaddr){
 }
 
 //sockfd
-int destroyServerSocket(int sockfd,struct sockaddr_un **servaddr){
+int destroyServerSocket(int sockfd,struct sockaddr_in **servaddr){
 	free(*servaddr);
 	*servaddr = NULL;
 	close(sockfd);

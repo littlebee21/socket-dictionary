@@ -16,11 +16,15 @@ int main(int argc,char *argv[])
 {
 	//create
 	int sockfd = -1;
-	struct sockaddr_un *servaddr;
+	struct sockaddr_in *servaddr;
 
 	//init
 	sockfd = createServerSocket(&servaddr);
-
+	if(sockfd == -1){
+		printf("server sockfd dont create");
+		printf("sockf is %d",sockfd);
+		return -1;
+	}
 
 	mainloop(sockfd);
 

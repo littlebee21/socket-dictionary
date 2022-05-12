@@ -15,8 +15,8 @@ int createServerSocketData(int sockfd);
 int destroyServerSocketData(int datafd);
 
 
-int createServerSocket(struct sockaddr_un **servaddr);
-int destroyServerSocket(int sockfd,struct sockaddr_un **servaddr);
+int createServerSocket(struct sockaddr_in **servaddr);
+int destroyServerSocket(int sockfd,struct sockaddr_in **servaddr);
 
 
 

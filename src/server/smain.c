@@ -35,14 +35,21 @@ int main(int argc,char *argv[])
 
 int mainloop(int sockfd){
 	int datafd = -1;
-	char buf[8] = "";
+	char receviveBuf[20] = "";
 	while(1){
 		datafd = createServerSocketData(sockfd);
+		/*
 		read(datafd,buf,8);
 
 		printf("Client say to me:%s\n",buf);
 
 		write(datafd,buf,strlen(buf) + 1);
+		*/
+
+		MyRead(datafd,(void *)receviveBuf,sizeof(receviveBuf));
+		printf("client  say to me: %s \n",receviveBuf);
+
+		MyWrite(datafd,(void *)receviveBuf,sizeof(receviveBuf));
 
 		destroyServerSocketData(datafd);
 	}

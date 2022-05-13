@@ -8,8 +8,7 @@ int get_User_password_by_name(sqlite3 *psqlengine,char *pname,char *password){
 	char sqlstr[80] = "";
 	char *perrmsg =NULL;
 
-	//sprintf(sqlstr,"SELECT password FROM user WHERE name=\"%s\";",pname);
-	sprintf(sqlstr,"SELECT * FROM user;");
+	sprintf(sqlstr,"SELECT password FROM user WHERE name=\"%s\";",pname);
 
 	ret = sqlite3_get_table(psqlengine,sqlstr,&ppret,&rows,&cols,&perrmsg);
 	if(ret != SQLITE_OK)

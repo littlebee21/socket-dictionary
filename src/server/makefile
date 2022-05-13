@@ -7,10 +7,13 @@ INC = -I ../../inc
 LDFLAGS= -lsqlite3
 LIB = 
 
-OBJS= ./ServerSocket.o ./smain.o ../public/dictolprotocol.o  ../public/dictolpublic.o    \
+OBJS=  ./smain.o ../public/dictolprotocol.o  ../public/dictolpublic.o    \
 ./DAO/HistoryDao.o   ./DAO/UserDao.o   \
+./Util/ServerSocket.o \
 ./SERVICE/HistoryService.o   ./SERVICE/UserService.o  \
-./Util/sqliteDriver.o
+./Util/sqliteDriver.o \
+./controller/ServerController.o
+
 
 all:$(TARGET)
 

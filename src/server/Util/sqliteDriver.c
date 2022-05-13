@@ -55,7 +55,7 @@ int init_database(sqlite3 *psqlengine){
 	}
 	else
 	{
-		printf("database init ok");
+		printf("database init ok\n");
 		sqlite3_free_table(ppret);
 		ppret = NULL;
 	}

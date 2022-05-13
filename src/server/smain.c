@@ -7,6 +7,8 @@
 #include  "../../inc/serverSocket.h"
 #include   "../../inc/UserService.h"
 #include  "../../inc/sqliteDrive.h"
+#include   "../../inc/dictolprotocol.h"
+#include   "../../inc/ServerController.h"
 
 
 
@@ -37,7 +39,13 @@ int main(int argc,char *argv[])
 	}
 	init_database(psqlEngine);
 
-
+	//test
+	if(0){
+		ret = login(psqlEngine, "gao", "123");
+		if(ret == 0){
+			printf("test success");
+		}
+	}
 
 	//loop
 	mainloop(sockfd,psqlEngine);
@@ -48,26 +56,35 @@ int main(int argc,char *argv[])
 	return 0;
 }
 
+
+
 int mainloop(int sockfd, sqlite3 *psqlEngine){
 	int datafd = -1;
-	char receviveBuf[20] = "";
-	int ret = -1;
-
-	//test
-	ret = login(psqlEngine, "gao", "123");
-	if(ret == 0){
-		printf("test success");
-	}
+	struct DictOLPDU * pRecPDU = NULL;
 
 
 	while(1){
 		datafd = createServerSocketData(sockfd);
+		printf("nothing wait \n");  //test
+		pRecPDU = RecvPDU(datafd);
+		printf("pRecPDU rece size is %d \n",pRecPDU->size);  //test
 
-		MyRead(datafd,(void *)receviveBuf,sizeof(receviveBuf));
-		printf("client  say to me: %s \n",receviveBuf);
-
-		MyWrite(datafd,(void *)receviveBuf,sizeof(receviveBuf));
-
+		switch(pRecPDU->type)
+		{
+			case DICTOL_PDU_TYPE_REG_REQ:
+				break;
+			case DICTOL_PDU_TYPE_LOGIN_REQ:
+				printf("case login \n");  //test
+				HandleLogin(datafd,psqlEngine,pRecPDU);
+				break;
+			case DICTOL_PDU_TYPE_QUERYWORD_REQ:
+				break;
+			case DICTOL_PDU_TYPE_HISTORY_REQ:
+				break;
+			default:
+				DestroyDictOLPDU(pRecPDU);
+				break;
+		}
 		destroyServerSocketData(datafd);
 	}
 	return 0;

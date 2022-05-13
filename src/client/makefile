@@ -5,7 +5,9 @@ CFLAGS= -g -Wall
 INC = -I ../../inc
 
 
-OBJS= ./cmain.o ./ClientSocket.o ../public/dictolprotocol.o ../public/dictolpublic.o
+OBJS= ./cmain.o ./util/ClientSocket.o ../public/dictolprotocol.o ../public/dictolpublic.o \
+	  ./view/view.o \
+	  ./controller/controller.o
 
 all:$(TARGET)
 

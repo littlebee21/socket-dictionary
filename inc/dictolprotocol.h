@@ -32,6 +32,11 @@ enum ENUM_DICTOL_PDU_TYPE
 };
 
 
+enum LOGIN_STATUS{
+	LOGIN_SUCCESS = 1,
+	LOGIN_FAIL
+};
+
 /*struct DictOLPDU成员作用描述:
 	size:PDU数据总字节数
 	type:表示协议数据的种类，相应数字对应相应种类
@@ -53,6 +58,13 @@ struct  DictOLPDU
 	int type;
    	char buf[1];
 };
+
+
+struct LoginData{
+	char name[30];
+	char password[30];
+};
+
 
 
 #define DICTOL_PDU_HEADER_SIZE  (sizeof(int) * 2)

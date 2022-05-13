@@ -65,16 +65,16 @@ int mainloop(int sockfd, sqlite3 *psqlEngine){
 
 	while(1){
 		datafd = createServerSocketData(sockfd);
-		printf("nothing wait \n");  //test
+		//printf("nothing wait \n");  //test
 		pRecPDU = RecvPDU(datafd);
-		printf("pRecPDU rece size is %d \n",pRecPDU->size);  //test
+		//printf("pRecPDU rece size is %d \n",pRecPDU->size);  //test
 
 		switch(pRecPDU->type)
 		{
 			case DICTOL_PDU_TYPE_REG_REQ:
 				break;
 			case DICTOL_PDU_TYPE_LOGIN_REQ:
-				printf("case login \n");  //test
+				//printf("case login \n");  //test
 				HandleLogin(datafd,psqlEngine,pRecPDU);
 				break;
 			case DICTOL_PDU_TYPE_QUERYWORD_REQ:

@@ -61,8 +61,8 @@ struct  DictOLPDU
 
 
 struct LoginData{
-	char name[30];
-	char password[30];
+	char name[NAME_LEN];
+	char password[PASS_LEN];
 };
 
 

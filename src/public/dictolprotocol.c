@@ -1,4 +1,4 @@
-#include "dictolpublic.h"
+#include "../../inc/dictolpublic.h"
 
 struct DictOLPDU *CreateRegisterREQPDU(char *name,char *password)
 {
@@ -13,6 +13,9 @@ struct DictOLPDU *CreateRegisterREQPDU(char *name,char *password)
     
     /*计算总的空间的大小*/
     len = DICTOL_PDU_HEADER_SIZE + NAME_LEN + PASS_LEN;
+	//printf("length is %ld \n",DICTOL_PDU_HEADER_SIZE); //test
+	//printf("length is %d \n",NAME_LEN); //test
+	//printf("length is %d \n",PASS_LEN); //test
         
     /*分配空间*/
     pstPDU = (struct DictOLPDU *)malloc(len);
@@ -29,6 +32,8 @@ struct DictOLPDU *CreateRegisterREQPDU(char *name,char *password)
 
     strncpy(pstPDU->buf,name,NAME_LEN - 1);
     strncpy(pstPDU->buf+NAME_LEN,password,PASS_LEN - 1);
+
+	//printf("length is %s \n",pstPDU->buf+NAME_LEN); //test
     
     /*返回被分配空间的首地址*/
     return pstPDU;

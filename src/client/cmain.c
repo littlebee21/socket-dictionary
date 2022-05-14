@@ -28,6 +28,7 @@ int main(int argc,char *argv[])
 				login(sockfd);
                 break;
             case 3:
+				wordSearch(sockfd);
                 break;
             case 4:
                 break;

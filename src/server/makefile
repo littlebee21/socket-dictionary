@@ -10,7 +10,7 @@ LIB =
 OBJS=  ./smain.o ../public/dictolprotocol.o  ../public/dictolpublic.o    \
 ./DAO/HistoryDao.o   ./DAO/UserDao.o   \
 ./Util/ServerSocket.o \
-./SERVICE/HistoryService.o   ./SERVICE/UserService.o  \
+./SERVICE/HistoryService.o   ./SERVICE/UserService.o  ./SERVICE/WordService.o \
 ./Util/sqliteDriver.o \
 ./controller/ServerController.o
 

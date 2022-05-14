@@ -12,6 +12,7 @@
 
 
 
+
 //define
 int mainloop(int sockfd, sqlite3 *psqlEngine);
 
@@ -61,6 +62,7 @@ int main(int argc,char *argv[])
 int mainloop(int sockfd, sqlite3 *psqlEngine){
 	int datafd = -1;
 	struct DictOLPDU * pRecPDU = NULL;
+	
 
 
 	while(1){
@@ -78,6 +80,7 @@ int mainloop(int sockfd, sqlite3 *psqlEngine){
 				HandleLogin(datafd,psqlEngine,pRecPDU);
 				break;
 			case DICTOL_PDU_TYPE_QUERYWORD_REQ:
+				HandleQueryWord(datafd,psqlEngine,pRecPDU,"gao");   //is login todo
 				break;
 			case DICTOL_PDU_TYPE_HISTORY_REQ:
 				break;

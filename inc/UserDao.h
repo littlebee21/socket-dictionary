@@ -6,6 +6,6 @@
 #include "stdio.h"
 
 
-int get_User_password_by_name(sqlite3 *psql,char *pname,char *password);
+int get_User_realpassword_by_name(sqlite3 *psqlengine,char *pname,char *realpassword);
 
 #endif

@@ -1,6 +1,7 @@
 #include "../../../inc/UserDao.h"
+#include <string.h>
 
-int get_User_password_by_name(sqlite3 *psqlengine,char *pname,char *password){
+int get_User_realpassword_by_name(sqlite3 *psqlengine,char *pname,char *realpassword){
 	int ret = -1;
 	int rows = 0;
 	int cols = 0;
@@ -20,6 +21,10 @@ int get_User_password_by_name(sqlite3 *psqlengine,char *pname,char *password){
 	}
 	else
 	{
+		printf("$$$$$$$$$，func = %s, line = %d $$$$$$$$$$$ \n", __func__, __LINE__); //test
+		printf("%-12s realpassword is\n",*(ppret+1));
+		strcpy(realpassword,*(ppret+1));
+		/*
 		int i = 0;
 		int j = 0;
 
@@ -39,6 +44,7 @@ int get_User_password_by_name(sqlite3 *psqlengine,char *pname,char *password){
 			}
 			printf("\n");
 		}
+		*/
 		sqlite3_free_table(ppret);
 		ppret = NULL;
 	}

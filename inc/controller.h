@@ -7,5 +7,6 @@
 
 
 int login(int sockfd);
+int wordSearch(int socketfd);
 
 #endif

@@ -12,7 +12,8 @@ int is_login(sqlites *psql, char *pname){
 int login(sqlite3 *psql, char *pname, char *ppassword){
 	int ret = 0;
 	char realPassword[30] = "";
-	ret = get_User_password_by_name(psql,pname,realPassword);
+	ret = get_User_realpassword_by_name(psql,pname,realPassword);
+
 	if(ret != 0){
 		printf("get ppassword fail ");
 		return -1;

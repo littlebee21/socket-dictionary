@@ -26,25 +26,25 @@ char *mygets(char *pout,int size)
 int display_main_ui(){
 	int op = -1;
 	printf("\n");
+	printf("####################### main face begin #####################3 \n");
+	printf("####################### main face begin #####################3 \n");
+	printf("####################### main face begin #####################3 \n");
     printf("Please select your operation:\n");
     printf("1. register\n");
     printf("2. login\n");
     printf("3. query word\n");
     printf("4. query history\n");
     printf("0. Exit\n");
+	printf("####################### main face end #####################3 \n");
     scanf("%d",&op);
 
     while(getchar()!='\n')
     {
     }
-	printf("op get\n");
+	printf("option get\n");
     return op;
 }
 
-struct LoginData{
-	char name[30];
-	char password[30];
-};
 
 int getnameAndPasswdFromView(char *name,char * password){
 	printf("Please input your name:\n");

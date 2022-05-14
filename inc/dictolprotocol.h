@@ -66,6 +66,14 @@ struct LoginData{
 };
 
 
+struct WordData{
+	char word[WORD_LEN];
+};
+struct ReturnWordData{
+	char word[200];
+};
+
+
 
 #define DICTOL_PDU_HEADER_SIZE  (sizeof(int) * 2)
 #define QUERY_WORD_ERR_STR "Not Found"
